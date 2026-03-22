@@ -1,0 +1,16 @@
+{
+  "name": "apnichaicss",
+  "version": "1.0.4",
+  "description": "A lightweight utility-first CSS engine built with JavaScript",
+  "main": "index.js",
+  "type": "module",
+  "keywords": [
+    "css",
+    "utility",
+    "tailwind",
+    "chai-css",
+    "styling"
+  ],
+  "author": "Devansh Yaduvanshi",
+  "license": "MIT"
+}
