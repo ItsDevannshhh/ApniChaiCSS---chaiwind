@@ -6,7 +6,7 @@
 ## 🌐 Live webpage Demo using this classes
 
 👉 **View it here:**
-🔗 [https://your-deployed-link.com](https://apni-chai-css-chaiwind.vercel.app/)
+🔗 [Click here](https://apni-chai-css-chaiwind.vercel.app/)
 
 
 ## ✨ What this demo shows
