@@ -1,6 +1,7 @@
 # ☕ ApniChaiCSS Demo
 
-🚀 A live demo of **ChaiCSS** — a lightweight utility-first CSS engine built with JavaScript.
+🚀 A live demo of **ApniChaiCSS** — a lightweight utility-first CSS engine built with JavaScript.
+write classes like tailwind but with chai-*
 
 
 ## 🌐 Live webpage Demo :-
