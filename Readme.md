@@ -2,14 +2,12 @@
 
 🚀 A live demo of **ChaiCSS** — a lightweight utility-first CSS engine built with JavaScript.
 
----
 
 ## 🌐 Live webpage Demo using this classes
 
 👉 **View it here:**
 🔗 [https://your-deployed-link.com](https://apni-chai-css-chaiwind.vercel.app/)
 
----
 
 ## ✨ What this demo shows
 
@@ -18,13 +16,11 @@
 * Typography & colors
 * Simple UI components (navbar, hero, cards)
 
----
 
 ## 📦 NPM Package
 
 👉 https://www.npmjs.com/package/apnichaicss
 
----
 
 ## 🚀 How it works
 
@@ -32,13 +28,10 @@
 * Scans DOM elements
 * Applies styles dynamically based on class names
 
----
 
 ## 👨‍💻 Author
 
 Devansh Yaduvanshi
-
----
 
 ## ⭐ Support
 
