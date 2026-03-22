@@ -1,90 +1,691 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>ApniChaiCSS Demo</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ApniChaiCSS</title>
 
-  <!-- 🌐 ChaiCSS CDN -->
-  <script type="module" src="https://unpkg.com/apnichaicss/index.js"></script>
+    <script type="module" src="https://unpkg.com/apnichaicss/index.js"></script>
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #0f172a;
-      color: white;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-  </style>
+        body {
+            font-family: system-ui, sans-serif;
+            background: #fff;
+            color: #111;
+            visibility: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        code {
+            font-family: monospace;
+            font-size: 13px;
+            background: #f2f2f2;
+            padding: 2px 7px;
+            border-radius: 4px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            padding: 10px 14px;
+            font-size: 14px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #888;
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .chai-tag {
+            font-family: monospace;
+            font-size: 13px;
+            background: #f0f0f0;
+            color: #111;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .css-out {
+            font-family: monospace;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .tab-btn {
+            font-family: system-ui, sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 6px 16px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background: #fff;
+            color: #444;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .code-block {
+            background: #1c1c1c;
+            color: #ddd;
+            font-family: monospace;
+            font-size: 13px;
+            line-height: 1.9;
+            padding: 18px 20px;
+            border-radius: 8px;
+        }
+
+        .ck {
+            color: #bbb;
+        }
+
+        .cs {
+            color: #ddd;
+        }
+
+        .cc {
+            color: #555;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .two-col {
+                flex-direction: column !important;
+            }
+
+            .hide-sm {
+                display: none !important;
+            }
+        }
+    </style>
 </head>
 
-<body class="chai-m-0 chai-p-0">
+<body>
 
-  <!-- Navbar -->
-  <div class="chai-d-flex chai-jc-space-between chai-ai-center chai-p-20">
-    <h2 class="chai-m-0">☕ ApniChaiCSS</h2>
-    <div>
-      <span class="chai-mr-20 chai-cursor-pointer">Home</span>
-      <span class="chai-mr-20 chai-cursor-pointer">Docs</span>
-      <span class="chai-cursor-pointer">GitHub</span>
-    </div>
-  </div>
-
-  <!-- Hero Section -->
-  <div class="chai-d-flex chai-fd-column chai-ai-center chai-jc-center chai-h-400 chai-text-center">
-
-    <h1 class="chai-d-flex chai-jc-center chai-fs-40 chai-mb-20">Build UI with Simple Classes</h1>
-
-    <p class="chai-fs-18 chai-op-0.7 chai-mb-30">
-      A lightweight utility-first CSS engine powered by JavaScript
-    </p>
-
-    <div class="chai-d-flex chai-gap-20">
-
-      <button class="chai-p-15 chai-br-10 chai-cursor-pointer">
-        <a href="https://www.npmjs.com/package/apnichaicss" target="_blank">
-          🚀 NPM Package
-        </a>
-      </button>
-
-      <button class="chai-p-15 chai-br-10 chai-cursor-pointer">
-        <a href="https://github.com/ItsDevannshhh/ApniChaiCSS---chaiwind" target="_blank">
-          ⭐ GitHub
-        </a>
-      </button>
-
-    </div>
-  </div>
-
-  <!-- Features -->
-  <div class="chai-d-flex chai-jc-center chai-gap-20 chai-p-40">
-
-    <div class="chai-p-20 chai-br-15 chai-w-250">
-      <h3 class="chai-mb-10">⚡ Fast</h3>
-      <p class="chai-op-0.7">No CSS files, instant styling using JS engine.</p>
+    <!-- NAV -->
+    <div style="border-bottom: 1px solid #eee; position: sticky; top: 0; background: #fff; z-index: 10;">
+        <div class="chai-d-flex chai-ai-center chai-jc-space-between chai-p-16 chai-pl-32 chai-pr-32"
+            style="max-width:900px;margin:auto">
+            <span style="font-weight:700; font-size:16px;">☕ ApniChaiCSS</span>
+            <div class="chai-d-flex chai-gap-28 hide-sm">
+                <a href="#syntax" class="chai-fs-14 chai-text-#555">Syntax</a>
+                <a href="#properties" class="chai-fs-14 chai-text-#555">Properties</a>
+                <a href="#install" class="chai-fs-14 chai-text-#555">Install</a>
+            </div>
+            <div class="chai-d-flex chai-gap-12 chai-ai-center">
+                <a href="https://github.com/ItsDevannshhh/ApniChaiCSS---chaiwind" target="_blank"
+                    class="chai-fs-13 chai-text-#555 hide-sm" style="display:flex;align-items:center;gap:5px">
+                    <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                    </svg>
+                    GitHub
+                </a>
+                <code style="background:#f0f0f0;color:#111;">v1.0.4</code>
+            </div>
+        </div>
     </div>
 
-    <div class="chai-p-20 chai-br-15 chai-w-250">
-      <h3 class="chai-mb-10">🎨 Flexible</h3>
-      <p class="chai-op-0.7">Supports spacing, layout and typography.</p>
+    <!-- HERO -->
+    <div class="chai-p-64 chai-pt-80 chai-pb-80 chai-text-center" style="max-width:640px;margin:auto">
+        <h1 class="chai-fs-40 chai-fw-700 chai-mb-16" style="line-height:1.2">
+            Style with <span class="chai-text-#333">chai-*</span> classes
+        </h1>
+        <p class="chai-fs-16 chai-text-#555 chai-mb-32" style="line-height:1.7">
+            A lightweight utility CSS engine built with JavaScript. Add classes to your HTML — it handles the rest. No
+            build step, no config.
+        </p>
+        <div class="chai-d-flex chai-gap-12 chai-jc-center two-col">
+            <a href="#install"
+                class="chai-bg-#111 chai-text-white chai-p-12 chai-pl-24 chai-pr-24 chai-br-6 chai-fw-600 chai-fs-14">Get
+                Started</a>
+            <a href="#properties"
+                class="chai-text-#333 chai-p-12 chai-pl-24 chai-pr-24 chai-br-6 chai-fw-600 chai-fs-14"
+                style="border:1px solid #ddd">Properties</a>
+        </div>
+
+        <!-- npm + github badges -->
+        <div class="chai-d-flex chai-gap-10 chai-jc-center chai-mt-28" style="flex-wrap:wrap">
+            <a href="https://www.npmjs.com/package/apnichaicss" target="_blank"
+                style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#555;background:#f5f5f5;padding:6px 14px;border-radius:6px;border:1px solid #e8e8e8">
+                <svg width="16" height="16" viewBox="0 0 18 7" fill="#cc3534">
+                    <path
+                        d="M0 0h18v6H9V7H5V6H0V0zm1 5h2V2h1v3h1V1H1v4zm5-4v5h2V5h2V1H6zm2 1h1v2H8V2zm3-1v4h2V2h1v3h1V2h1v3h1V1h-6z" />
+                </svg>
+                npmjs.com/package/apnichaicss
+            </a>
+            <a href="https://github.com/ItsDevannshhh/ApniChaiCSS---chaiwind" target="_blank"
+                style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#555;background:#f5f5f5;padding:6px 14px;border-radius:6px;border:1px solid #e8e8e8">
+                <svg height="15" width="15" viewBox="0 0 16 16" fill="currentColor">
+                    <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+                GitHub repo
+            </a>
+        </div>
     </div>
 
-    <div class="chai-p-20 chai-br-15 chai-w-250">
-      <h3 class="chai-mb-10">🚀 Easy</h3>
-      <p class="chai-op-0.7">Just add classes, no config needed.</p>
+    <!-- STATS -->
+    <div class="chai-d-flex" style="border-top:1px solid #eee;border-bottom:1px solid #eee;background:#f8f8f8">
+        <div class="chai-p-24 chai-text-center" style="flex:1;border-right:1px solid #eee">
+            <div class="chai-fs-24 chai-fw-700">0</div>
+            <div class="chai-fs-13 chai-text-#888 chai-mt-4">Dependencies</div>
+        </div>
+        <div class="chai-p-24 chai-text-center" style="flex:1;border-right:1px solid #eee">
+            <div class="chai-fs-24 chai-fw-700">~2KB</div>
+            <div class="chai-fs-13 chai-text-#888 chai-mt-4">Size</div>
+        </div>
+        <div class="chai-p-24 chai-text-center" style="flex:1;border-right:1px solid #eee">
+            <div class="chai-fs-24 chai-fw-700">50+</div>
+            <div class="chai-fs-13 chai-text-#888 chai-mt-4">Properties</div>
+        </div>
+        <div class="chai-p-24 chai-text-center" style="flex:1">
+            <div class="chai-fs-24 chai-fw-700">CDN</div>
+            <div class="chai-fs-13 chai-text-#888 chai-mt-4">+ npm</div>
+        </div>
     </div>
 
-  </div>
+    <!-- SYNTAX -->
+    <div id="syntax" style="max-width:900px;margin:auto;border-bottom:1px solid #eee">
+        <div class="chai-p-48">
+            <h2 class="chai-fs-22 chai-fw-700 chai-mb-8">Syntax</h2>
+            <p class="chai-fs-14 chai-text-#555 chai-mb-28" style="line-height:1.7">Every class follows the same
+                pattern:</p>
 
-  <!-- Footer -->
-  <div class="chai-text-center chai-p-20 chai-op-0.6">
-    Made with ☕ by Devansh
-  </div>
+            <div class="chai-d-flex chai-ai-center chai-gap-4 chai-mb-32" style="flex-wrap:wrap">
+                <code style="background:#111;color:#fff;font-size:16px;padding:8px 14px">chai</code>
+                <span class="chai-fs-18 chai-text-#ccc">-</span>
+                <code style="background:#e8e8e8;color:#333;font-size:16px;padding:8px 14px">property</code>
+                <span class="chai-fs-18 chai-text-#ccc">-</span>
+                <code style="background:#f2f2f2;color:#555;font-size:16px;padding:8px 14px">value</code>
+            </div>
+
+            <div class="chai-d-flex chai-gap-12 two-col" style="flex-wrap:wrap">
+                <div class="chai-p-16 chai-br-6" style="flex:1;min-width:180px;border:1px solid #eee">
+                    <code class="chai-tag">chai-p-20</code>
+                    <p class="chai-fs-13 chai-text-#888 chai-mt-8">padding: 20px</p>
+                </div>
+                <div class="chai-p-16 chai-br-6" style="flex:1;min-width:180px;border:1px solid #eee">
+                    <code class="chai-tag">chai-bg-red</code>
+                    <p class="chai-fs-13 chai-text-#888 chai-mt-8">background-color: red</p>
+                </div>
+                <div class="chai-p-16 chai-br-6" style="flex:1;min-width:180px;border:1px solid #eee">
+                    <code class="chai-tag">chai-text-center</code>
+                    <p class="chai-fs-13 chai-text-#888 chai-mt-8">text-align: center</p>
+                </div>
+                <div class="chai-p-16 chai-br-6" style="flex:1;min-width:180px;border:1px solid #eee">
+                    <code class="chai-tag">chai-rotate-45</code>
+                    <p class="chai-fs-13 chai-text-#888 chai-mt-8">transform: rotate(45deg)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROPERTIES -->
+    <div id="properties" style="max-width:900px;margin:auto;border-bottom:1px solid #eee">
+        <div class="chai-p-48">
+            <h2 class="chai-fs-22 chai-fw-700 chai-mb-8">Properties</h2>
+            <p class="chai-fs-14 chai-text-#555 chai-mb-24" style="line-height:1.7">All supported shorthands and their
+                CSS output.</p>
+
+            <div class="chai-d-flex chai-gap-8 chai-mb-20" style="flex-wrap:wrap">
+                <button class="tab-btn active" onclick="tab('spacing',this)">Spacing</button>
+                <button class="tab-btn" onclick="tab('size',this)">Size</button>
+                <button class="tab-btn" onclick="tab('typography',this)">Typography</button>
+                <button class="tab-btn" onclick="tab('layout',this)">Layout</button>
+                <button class="tab-btn" onclick="tab('visual',this)">Visual</button>
+                <button class="tab-btn" onclick="tab('transform',this)">Transform</button>
+                <button class="tab-btn" onclick="tab('position',this)">Position</button>
+            </div>
+
+            <div style="border:1px solid #eee;border-radius:8px;overflow:hidden">
+
+                <div id="tab-spacing" class="tab-pane active">
+                    <table>
+                        <tr style="background:#f8f8f8">
+                            <th>Class</th>
+                            <th>CSS Output</th>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-p-{n}</code></td>
+                            <td class="css-out">padding: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-pt-{n}</code></td>
+                            <td class="css-out">padding-top: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-pb-{n}</code></td>
+                            <td class="css-out">padding-bottom: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-pl-{n}</code></td>
+                            <td class="css-out">padding-left: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-pr-{n}</code></td>
+                            <td class="css-out">padding-right: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-m-{n}</code></td>
+                            <td class="css-out">margin: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-mt-{n}</code></td>
+                            <td class="css-out">margin-top: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-mb-{n}</code></td>
+                            <td class="css-out">margin-bottom: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-ml-{n}</code></td>
+                            <td class="css-out">margin-left: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-mr-{n}</code></td>
+                            <td class="css-out">margin-right: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-gap-{n}</code></td>
+                            <td class="css-out">gap: npx</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="tab-size" class="tab-pane">
+                    <table>
+                        <tr style="background:#f8f8f8">
+                            <th>Class</th>
+                            <th>CSS Output</th>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-w-{n}</code></td>
+                            <td class="css-out">width: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-h-{n}</code></td>
+                            <td class="css-out">height: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-minw-{n}</code></td>
+                            <td class="css-out">min-width: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-minh-{n}</code></td>
+                            <td class="css-out">min-height: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-maxw-{n}</code></td>
+                            <td class="css-out">max-width: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-maxh-{n}</code></td>
+                            <td class="css-out">max-height: npx</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="tab-typography" class="tab-pane">
+                    <table>
+                        <tr style="background:#f8f8f8">
+                            <th>Class</th>
+                            <th>CSS Output</th>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-fs-{n}</code></td>
+                            <td class="css-out">font-size: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-fw-{val}</code></td>
+                            <td class="css-out">font-weight: val</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-lh-{val}</code></td>
+                            <td class="css-out">line-height: val</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-ls-{n}</code></td>
+                            <td class="css-out">letter-spacing: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-text-center</code></td>
+                            <td class="css-out">text-align: center</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-text-left</code></td>
+                            <td class="css-out">text-align: left</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-text-right</code></td>
+                            <td class="css-out">text-align: right</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-text-{color}</code></td>
+                            <td class="css-out">color: color</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="tab-layout" class="tab-pane">
+                    <table>
+                        <tr style="background:#f8f8f8">
+                            <th>Class</th>
+                            <th>CSS Output</th>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-d-{val}</code></td>
+                            <td class="css-out">display: val</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-jc-{val}</code></td>
+                            <td class="css-out">justify-content: val</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-ai-{val}</code></td>
+                            <td class="css-out">align-items: val</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-ac-{val}</code></td>
+                            <td class="css-out">align-content: val</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-fd-{val}</code></td>
+                            <td class="css-out">flex-direction: val</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-fwf-{val}</code></td>
+                            <td class="css-out">flex-wrap: val</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="tab-visual" class="tab-pane">
+                    <table>
+                        <tr style="background:#f8f8f8">
+                            <th>Class</th>
+                            <th>CSS Output</th>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-bg-{color}</code></td>
+                            <td class="css-out">background-color: color</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-br-{n}</code></td>
+                            <td class="css-out">border-radius: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-bd-{n}</code></td>
+                            <td class="css-out">border: npx solid black</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-bc-{val}</code></td>
+                            <td class="css-out">border-color: val</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-op-{val}</code></td>
+                            <td class="css-out">opacity: val</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-shadow-{val}</code></td>
+                            <td class="css-out">box-shadow: val</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-overflow-{val}</code></td>
+                            <td class="css-out">overflow: val</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-cursor-{val}</code></td>
+                            <td class="css-out">cursor: val</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="tab-transform" class="tab-pane">
+                    <table>
+                        <tr style="background:#f8f8f8">
+                            <th>Class</th>
+                            <th>CSS Output</th>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-scale-{val}</code></td>
+                            <td class="css-out">transform: scale(val)</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-rotate-{n}</code></td>
+                            <td class="css-out">transform: rotate(ndeg)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="tab-position" class="tab-pane">
+                    <table>
+                        <tr style="background:#f8f8f8">
+                            <th>Class</th>
+                            <th>CSS Output</th>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-pos-{val}</code></td>
+                            <td class="css-out">position: val</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-z-{n}</code></td>
+                            <td class="css-out">z-index: n</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-top-{n}</code></td>
+                            <td class="css-out">top: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-left-{n}</code></td>
+                            <td class="css-out">left: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-right-{n}</code></td>
+                            <td class="css-out">right: npx</td>
+                        </tr>
+                        <tr>
+                            <td><code class="chai-tag">chai-bottom-{n}</code></td>
+                            <td class="css-out">bottom: npx</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- INSTALL -->
+    <div id="install" style="max-width:900px;margin:auto;border-bottom:1px solid #eee">
+        <div class="chai-p-48">
+            <h2 class="chai-fs-22 chai-fw-700 chai-mb-8">Installation</h2>
+            <p class="chai-fs-14 chai-text-#555 chai-mb-28" style="line-height:1.7">Pick whichever way fits your
+                project.</p>
+
+            <div class="chai-d-flex chai-gap-24 two-col">
+                <div style="flex:1">
+                    <p class="chai-fs-14 chai-fw-600 chai-mb-12">📦 npm</p>
+                    <div class="code-block">
+                        <span class="cc"># install</span>
+                        <span class="ck">npm</span> install apnichaicss
+
+                        <span class="cc"># use in your JS</span>
+                        <span class="ck">import</span> { applyChaiStyles }
+                        from <span class="cs">"apnichaicss"</span>;
+                        <span class="ck">applyChaiStyles</span>();
+                    </div>
+                    <a href="https://www.npmjs.com/package/apnichaicss" target="_blank"
+                        class="chai-d-flex chai-ai-center chai-gap-6 chai-mt-12 chai-fs-13 chai-text-#555"
+                        style="width:fit-content">
+                        <svg width="15" height="15" viewBox="0 0 18 7" fill="#cc3534">
+                            <path
+                                d="M0 0h18v6H9V7H5V6H0V0zm1 5h2V2h1v3h1V1H1v4zm5-4v5h2V5h2V1H6zm2 1h1v2H8V2zm3-1v4h2V2h1v3h1V2h1v3h1V1h-6z" />
+                        </svg>
+                        npmjs.com/package/apnichaicss →
+                    </a>
+                </div>
+                <div style="flex:1">
+                    <p class="chai-fs-14 chai-fw-600 chai-mb-12">🌐 CDN</p>
+                    <div class="code-block">
+                        <span class="cc">&lt;!-- paste in &lt;head&gt; --&gt;</span>
+                        &lt;script type=<span class="cs">"module"</span>
+                        src=<span class="cs">"https://unpkg.com/
+                            apnichaicss/index.js"</span>
+                        &gt;&lt;/script&gt;
+
+                        <span class="cc">&lt;!-- then just use classes --&gt;</span>
+                        &lt;div class=<span class="cs">"chai-p-20
+                            chai-bg-red"</span>&gt;
+                        Hello ☕
+                        &lt;/div&gt;
+                    </div>
+                </div>
+            </div>
+
+            <div class="chai-p-16 chai-br-6 chai-mt-24" style="background:#f5f5f5;border:1px solid #e0e0e0">
+                <p class="chai-fs-13 chai-text-#444" style="line-height:1.7">
+                    <strong>Note:</strong> npm requires a bundler (Vite, webpack, etc.). CDN auto-runs in the browser —
+                    no extra function call needed.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXAMPLES -->
+    <div style="max-width:900px;margin:auto">
+        <div class="chai-p-48">
+            <h2 class="chai-fs-22 chai-fw-700 chai-mb-8">Examples</h2>
+            <p class="chai-fs-14 chai-text-#555 chai-mb-28" style="line-height:1.7">This page is styled using chai-*
+                classes. Here are a few patterns:</p>
+
+            <div class="chai-d-flex chai-gap-16 two-col" style="flex-wrap:wrap">
+
+                <!-- button -->
+                <div style="flex:1;min-width:200px;border:1px solid #eee;border-radius:8px;overflow:hidden">
+                    <div class="chai-p-24 chai-text-center" style="background:#f8f8f8;border-bottom:1px solid #eee">
+                        <button
+                            class="chai-bg-#111 chai-text-white chai-p-10 chai-pl-22 chai-pr-22 chai-br-6 chai-fw-600 chai-fs-14 chai-cursor-pointer">
+                            Click me ☕
+                        </button>
+                    </div>
+                    <div class="chai-p-16">
+                        <code style="font-size:12px;line-height:2;display:block;background:none;padding:0;color:#888">
+chai-bg-#111<br>chai-text-white<br>chai-p-10 chai-pl-22<br>chai-br-6 chai-fw-600
+                        </code>
+                    </div>
+                </div>
+
+                <!-- card -->
+                <div style="flex:1;min-width:200px;border:1px solid #eee;border-radius:8px;overflow:hidden">
+                    <div class="chai-p-24" style="background:#f8f8f8;border-bottom:1px solid #eee">
+                        <div class="chai-bg-white chai-p-16 chai-br-8" style="box-shadow:0 1px 6px rgba(0,0,0,0.08)">
+                            <p class="chai-fs-14 chai-fw-700 chai-mb-6">ApniChaiCSS</p>
+                            <p class="chai-fs-13 chai-text-#777" style="line-height:1.6">Zero-dep styling engine.</p>
+                        </div>
+                    </div>
+                    <div class="chai-p-16">
+                        <code style="font-size:12px;line-height:2;display:block;background:none;padding:0;color:#888">
+chai-bg-white chai-p-16<br>chai-br-8 chai-fs-14<br>chai-fw-700 chai-mb-6
+                        </code>
+                    </div>
+                </div>
+
+                <!-- badges -->
+                <div style="flex:1;min-width:200px;border:1px solid #eee;border-radius:8px;overflow:hidden">
+                    <div class="chai-p-24 chai-d-flex chai-ai-center chai-jc-center chai-gap-8"
+                        style="background:#f8f8f8;border-bottom:1px solid #eee;flex-wrap:wrap">
+                        <span
+                            class="chai-bg-#111 chai-text-white chai-p-5 chai-pl-12 chai-pr-12 chai-br-20 chai-fs-13 chai-fw-600">Design</span>
+                        <span
+                            class="chai-bg-#444 chai-text-white chai-p-5 chai-pl-12 chai-pr-12 chai-br-20 chai-fs-13 chai-fw-600">Code</span>
+                        <span
+                            class="chai-bg-#777 chai-text-white chai-p-5 chai-pl-12 chai-pr-12 chai-br-20 chai-fs-13 chai-fw-600">Ship</span>
+                    </div>
+                    <div class="chai-p-16">
+                        <code style="font-size:12px;line-height:2;display:block;background:none;padding:0;color:#888">
+chai-d-flex chai-gap-8<br>chai-bg-#111<br>chai-p-5 chai-pl-12<br>chai-br-20 chai-fs-13
+                        </code>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div style="border-top:1px solid #eee;background:#f8f8f8">
+        <div class="chai-p-32 chai-text-center">
+            <p class="chai-fs-15 chai-fw-700 chai-text-#111 chai-mb-10">☕ ApniChaiCSS</p>
+            <div class="chai-d-flex chai-gap-16 chai-jc-center chai-mb-10" style="flex-wrap:wrap">
+                <a href="https://www.npmjs.com/package/apnichaicss" target="_blank"
+                    class="chai-d-flex chai-ai-center chai-gap-6 chai-fs-13 chai-text-#555"
+                    style="text-decoration:none">
+                    <svg width="14" height="14" viewBox="0 0 18 7" fill="#cc3534">
+                        <path
+                            d="M0 0h18v6H9V7H5V6H0V0zm1 5h2V2h1v3h1V1H1v4zm5-4v5h2V5h2V1H6zm2 1h1v2H8V2zm3-1v4h2V2h1v3h1V2h1v3h1V1h-6z" />
+                    </svg>
+                    npm package
+                </a>
+                <span class="chai-text-#ddd">·</span>
+                <a href="https://github.com/ItsDevannshhh/ApniChaiCSS---chaiwind" target="_blank"
+                    class="chai-d-flex chai-ai-center chai-gap-6 chai-fs-13 chai-text-#555"
+                    style="text-decoration:none">
+                    <svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor">
+                        <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+            <p class="chai-fs-13 chai-text-#888">Built by Devansh Yaduvanshi · MIT · v1.0.4</p>
+        </div>
+    </div>
+
+    <script>
+        function tab(name, btn) {
+            document.querySelectorAll('.tab-pane').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + name).classList.add('active');
+            btn.classList.add('active');
+        }
+    </script>
 
 </body>
+
 </html>
